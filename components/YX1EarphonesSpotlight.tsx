@@ -33,7 +33,7 @@ export default function YX1EarphonesSpotlight() {
         </h2>
 
         <Link
-          href="#"
+          href="/earphones/yx1-earphones"
           className="border border-[#000]
             w-[16rem] text-center
             px-[2.9rem] py-[1.5rem]

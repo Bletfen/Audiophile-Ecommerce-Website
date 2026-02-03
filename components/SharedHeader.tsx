@@ -16,6 +16,7 @@ export default function SharedHeader() {
     <>
       <header
         className={`
+            pt-[3.2rem] md:pt-[0]
         md:px-[3.9rem]
         xl:px-[0] ${isHome ? "bg-[#191919]" : "bg-[#000]"}`}
       >

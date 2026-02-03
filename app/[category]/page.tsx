@@ -1,9 +1,10 @@
 import Category from "@/components/Category";
+import CategoryInfo from "@/components/CategoryInfo";
 import Footer from "@/components/Footer";
-import HeadphoneInfo from "@/components/HeadphoneInfo";
 import HomeInfo from "@/components/HomeInfo";
 import data from "@/data/data.json";
 import { TProduct } from "@/types/type";
+import { notFound } from "next/navigation";
 
 export default async function page({
   params,
@@ -11,6 +12,13 @@ export default async function page({
   params: Promise<{ category: string }>;
 }) {
   const category = (await params).category;
+  const validateRouting = () => {
+    const validCategories = data.map((item) => item.category);
+    if (!validCategories.includes(category)) {
+      return notFound();
+    }
+  };
+  validateRouting();
   const categoryData = (data as TProduct[])
     .filter((item) => item.category === category)
     .reverse();
@@ -41,7 +49,7 @@ export default async function page({
         className="px-[2.4rem] mt-[6.4rem]
         md:px-[3.9rem] md:mt-[12rem]"
       >
-        <HeadphoneInfo data={firstIsNewer} />
+        <CategoryInfo data={firstIsNewer} />
       </main>
       <section className="mt-[12rem]">
         <Category />

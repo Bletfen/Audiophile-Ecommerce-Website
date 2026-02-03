@@ -21,7 +21,7 @@ export default function ZX7SpeakerSpotlight() {
         ZX7 SPEAKER
       </h2>
       <Link
-        href="#"
+        href="/speakers/zx7-speaker"
         className="border border-[#000]
         w-[16rem] text-center
         px-[2.9rem] py-[1.5rem]

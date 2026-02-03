@@ -2,7 +2,7 @@ import { TProduct } from "@/types/type";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeadphoneInfo({ data }: { data: TProduct[] }) {
+export default function CategoryInfo({ data }: { data: TProduct[] }) {
   return (
     <div
       className="flex flex-col items-center
@@ -84,7 +84,7 @@ export default function HeadphoneInfo({ data }: { data: TProduct[] }) {
               {item.description}
             </p>
             <Link
-              href="#"
+              href={`/${item.category}/${item.slug}`}
               className="px-[3rem] py-[1.5rem] bg-[#d87d4a]
                 text-white text-[1.3rem] font-bold
                 inline-block

@@ -77,7 +77,7 @@ export default function Category() {
                 gap-[1.3rem] justify-center"
               >
                 <Link
-                  href={"#"}
+                  href={"/" + item.category}
                   className="text-[1.3rem] font-bold
                     tracking-[0.1rem] text-[#000] opacity-50
                     "

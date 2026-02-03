@@ -54,7 +54,7 @@ export default function ZX9SpeakerSpotlight() {
           truly remarkable sound.
         </p>
         <Link
-          href="#"
+          href="/speakers/zx9-speaker"
           className="bg-[#000]
             px-[3.1rem] py-[1.5rem]
             text-[1.3rem] font-bold
