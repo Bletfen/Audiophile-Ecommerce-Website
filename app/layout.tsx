@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import SharedHeader from "@/components/SharedHeader";
 
 const manrope = Manrope({
   weight: ["400", "500", "700", "800"],
@@ -21,8 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${manrope.className} antialiased
-      bg-[#fafafa]`}
+        bg-[#fafafa]`}
       >
+        <SharedHeader />
         {children}
       </body>
     </html>
