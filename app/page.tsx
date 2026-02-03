@@ -16,8 +16,8 @@ export default function Home() {
         <Category />
         <section
           className="px-[2.4rem] mt-[12rem]
-        flex flex-col items-center
-        gap-[2.4rem] md:mt-[9.6rem]"
+          flex flex-col items-center
+          gap-[2.4rem] md:mt-[9.6rem]"
         >
           <ZX9SpeakerSpotlight />
           <ZX7SpeakerSpotlight />
@@ -27,7 +27,7 @@ export default function Home() {
           <HomeInfo />
         </section>
       </main>
-      <footer className="mt-[12rem] md:mt-[9.6rem]">
+      <footer className="mt-[12rem] md:mt-[9.6rem] bg-[#101010]">
         <Footer />
       </footer>
     </>

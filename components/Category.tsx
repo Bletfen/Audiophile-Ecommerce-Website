@@ -29,15 +29,17 @@ export default function Category() {
       className="px-[2.4rem] flex
     flex-col items-center md:flex-row
     transition-all duration-300
-    md:gap-[1rem] md:justify-center"
+    md:gap-[1rem] md:justify-center
+    lg:gap-[3rem]"
     >
       {listOfCategories.map((item, i) => (
         <div key={i}>
           <div
             className="flex flex-col items-center
             relative mt-[9.2rem] transition-all duration-300
-            w-[32.7rem] h-[16.5rem]
-            md:w-[22.3rem] md:h-[16.5rem]"
+            w-[32.7rem]
+            md:w-[22.3rem] 
+            lg:w-[35rem]"
           >
             <Image
               src={item.images[0].desktop}
@@ -65,7 +67,8 @@ export default function Category() {
               <h2
                 className="text-[1.5rem] font-bold
                 text-[#000] tracking-[1.07px]
-                mb-[1.3rem]"
+                mb-[1.3rem]
+                lg:text-[1.8rem] tracking-[1.29px]"
               >
                 {item.category.toUpperCase()}
               </h2>

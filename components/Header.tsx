@@ -1,27 +1,46 @@
+import Link from "next/link";
 import Bitmap from "./Bitmap";
+
+const linkArray = [
+  { name: "Home", href: "#" },
+  { name: "Headphones", href: "#" },
+  { name: "Speakers", href: "#" },
+  { name: "Earphones", href: "#" },
+];
 
 export default function Header() {
   return (
-    <header>
+    <header className="max-w-[1440px] mx-auto">
       <div
         className="w-full h-[1.5rem]
-      bg-[#191919] transition-all duration-300 ease-in-out"
+      bg-[#191919] transition-all duration-300 ease-in-out
+      md:hidden"
       ></div>
       <div
         className="bg-[#191919]
-        md:px-[3.9rem]"
+        md:px-[3.9rem]
+        xl:px-[0]"
       >
         <div
           className="flex items-center justify-between
             pt-[1.7rem] pb-[3.2rem]
             px-[2.4rem]
-            md:px-[0]"
+            md:px-[0] max-w-[1110px] mx-auto
+            md:pt-[3.2rem] lg:pt-[3.6rem]
+            lg:pb-[3.6rem]
+            "
         >
           <div
             className="md:flex items-center
-        gap-[4.2rem] transition-all duration-300"
+            gap-[4.2rem] transition-all duration-300
+            lg:gap-[19.7rem]"
           >
-            <svg width="16" height="15" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className="lg:hidden"
+              width="16"
+              height="15"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <g fill="#FFF" fillRule="evenodd">
                 <path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z" />
               </g>
@@ -38,6 +57,18 @@ export default function Header() {
                 fillRule="nonzero"
               />
             </svg>
+            <div
+              className="hidden lg:flex text-white
+            text-[1.3rem] font-bold leading-[1.92]
+            tracking-[0.2rem] gap-[3.4rem]
+            "
+            >
+              {linkArray.map((link) => (
+                <div>
+                  <Link href={link.href}>{link.name.toUpperCase()}</Link>
+                </div>
+              ))}
+            </div>
           </div>
           <svg
             className="md:hidden"
@@ -59,9 +90,11 @@ export default function Header() {
             />
           </svg>
         </div>
-        <div className="h-px w-full bg-[#4C4C4C]" />
+        <div className="h-px w-full bg-[#4C4C4C] max-w-[1110px] mx-auto" />
       </div>
-      <Bitmap />
+      <div className="max-w-[1440px] mx-auto">
+        <Bitmap />
+      </div>
     </header>
   );
 }

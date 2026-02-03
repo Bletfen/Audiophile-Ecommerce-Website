@@ -1,7 +1,10 @@
 import Image from "next/image";
 export default function HomeInfo() {
   return (
-    <div>
+    <div
+      className="
+      lg:flex max-w-[111rem] gap-[12.5rem] mx-auto"
+    >
       <Image
         src={
           "/assets/product-xx99-mark-two-headphones/mobile/image-gallery-1.jpg"
@@ -20,12 +23,28 @@ export default function HomeInfo() {
         height={300}
         alt="XX99 Mark Two Headphones"
         className="rounded-[0.8rem] mb-[4rem]
-        hidden md:flex transition-all duration-300"
+        hidden md:flex transition-all duration-300
+        lg:hidden
+        "
       />
+      <div
+        className="hidden lg:flex w-[54rem] h-[58.8rem] relative
+        order-2"
+      >
+        <Image
+          src={"/assets/home/desktop/test.png"}
+          fill
+          alt="XX99 Mark Two Headphones"
+          className="rounded-[0.8rem] mb-[4rem]
+          transition-all duration-300 
+          "
+        />
+      </div>
       <div
         className="flex flex-col text-center items-center
         justify-center w-[32.7rem] mx-auto
-        gap-[3.2rem] md:w-[57.3rem]"
+        gap-[3.2rem] md:w-[57.3rem] lg:w-[44.5rem]
+        lg:items-start lg:text-start"
       >
         <h2
           className="text-[2.8rem] font-bold tracking-[0.1rem]
