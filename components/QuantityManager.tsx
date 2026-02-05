@@ -83,7 +83,8 @@ export default function QuantityMangaer({
           value={displayQuantity}
           onChange={handleChange}
           className="text-[1.3rem] font-bold
-          tracking-[0.1rem] text-center outline-none"
+          tracking-[0.1rem] text-center outline-none
+          appearance-none"
         />
         <button
           type="button"
