@@ -3,6 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Category from "./Category";
+import useCartStore from "@/store/cartStore";
+import Cart from "./Cart";
 
 const linkArray = [
   { name: "Home", href: "/" },
@@ -15,9 +17,10 @@ export default function SharedHeader() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isCartOpen, setIsCartOpen, items } = useCartStore();
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = isOpen || isCartOpen ? "hidden" : "auto";
     const handleResize = () => {
       if (window.innerWidth >= 1440) {
         setIsOpen(false);
@@ -27,12 +30,12 @@ export default function SharedHeader() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isOpen]);
+  }, [isOpen, isCartOpen]);
 
   return (
     <>
       <header
-        className={`
+        className={` relative
             pt-[3.2rem] md:pt-[0]
         md:px-[3.9rem] ${isOpen ? "" : ""}
         xl:px-[0] ${isHome ? "bg-[#191919]" : "bg-[#000]"}`}
@@ -56,7 +59,10 @@ export default function SharedHeader() {
               width="16"
               height="15"
               xmlns="http://www.w3.org/2000/svg"
-              onClick={() => setIsOpen((prev) => !prev)}
+              onClick={() => {
+                setIsCartOpen(false);
+                setIsOpen((prev) => !prev);
+              }}
             >
               <g fill="#FFF" fillRule="evenodd">
                 <path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z" />
@@ -99,13 +105,34 @@ export default function SharedHeader() {
               fillRule="nonzero"
             />
           </svg>
-          <svg width="23" height="20" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M8.625 15.833c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.054-.935-2.054-2.083 0-1.15.922-2.084 2.054-2.084zm9.857 0c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.053-.935-2.053-2.083 0-1.15.92-2.084 2.053-2.084zm-9.857 1.39a.69.69 0 00-.685.694.69.69 0 00.685.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zm9.857 0a.69.69 0 00-.684.694.69.69 0 00.684.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zM4.717 0c.316 0 .59.215.658.517l.481 2.122h16.47a.68.68 0 01.538.262c.127.166.168.38.11.579l-2.695 9.236a.672.672 0 01-.648.478H7.41a.667.667 0 00-.673.66c0 .364.303.66.674.66h12.219c.372 0 .674.295.674.66 0 .364-.302.66-.674.66H7.412c-1.115 0-2.021-.889-2.021-1.98 0-.812.502-1.511 1.218-1.816L4.176 1.32H.674A.667.667 0 010 .66C0 .296.302 0 .674 0zm16.716 3.958H6.156l1.797 7.917h11.17l2.31-7.917z"
-              fill="#FFF"
-              fillRule="nonzero"
-            />
-          </svg>
+          <div className="relative">
+            <svg
+              onClick={() => {
+                setIsOpen(false);
+                setIsCartOpen(!isCartOpen);
+              }}
+              width="23"
+              height="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.625 15.833c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.054-.935-2.054-2.083 0-1.15.922-2.084 2.054-2.084zm9.857 0c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.053-.935-2.053-2.083 0-1.15.92-2.084 2.053-2.084zm-9.857 1.39a.69.69 0 00-.685.694.69.69 0 00.685.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zm9.857 0a.69.69 0 00-.684.694.69.69 0 00.684.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zM4.717 0c.316 0 .59.215.658.517l.481 2.122h16.47a.68.68 0 01.538.262c.127.166.168.38.11.579l-2.695 9.236a.672.672 0 01-.648.478H7.41a.667.667 0 00-.673.66c0 .364.303.66.674.66h12.219c.372 0 .674.295.674.66 0 .364-.302.66-.674.66H7.412c-1.115 0-2.021-.889-2.021-1.98 0-.812.502-1.511 1.218-1.816L4.176 1.32H.674A.667.667 0 010 .66C0 .296.302 0 .674 0zm16.716 3.958H6.156l1.797 7.917h11.17l2.31-7.917z"
+                fill="#FFF"
+                fillRule="nonzero"
+              />
+            </svg>
+            {items.length > 0 && (
+              <div
+                className="absolute -top-3 -right-3
+                  w-[1.6rem] h-[1.6rem] rounded-full
+                  bg-[#d87d4a] flex items-center
+                  justify-center text-white
+                  text-[1.2rem] font-bold"
+              >
+                {items.length}
+              </div>
+            )}
+          </div>
         </div>
         <div className="h-px w-full bg-[#4C4C4C] max-w-[1110px] mx-auto" />
         {isOpen && (
@@ -115,6 +142,15 @@ export default function SharedHeader() {
               top-[10.8rem] md:top-[9rem] z-50 bg-black/50 min-h-screen"
           >
             <Category type="menu" />
+          </div>
+        )}
+        {isCartOpen && (
+          <div
+            onClick={() => setIsCartOpen(false)}
+            className="fixed inset-x-0 bottom-0 top-[10.6rem]
+            md:top-[9.7rem] z-50 bg-black/50 min-h-screen"
+          >
+            <Cart />
           </div>
         )}
       </header>

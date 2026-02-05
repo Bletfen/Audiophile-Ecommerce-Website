@@ -15,7 +15,7 @@ export default async function page({
         href={`/${itemInfo?.category}`}
         className="text-[1.5rem] text-[#000] opacity-50
         leading-[1.67] font-[500] px-[2.4rem]
-        md:px-[3.9rem] lg:w-[111rem] mx-auto
+        md:px-[3.9rem] lg:w-[111rem] lg:mx-auto
         lg:px-[0]"
       >
         Go Back

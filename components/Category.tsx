@@ -1,6 +1,6 @@
 import Image from "next/image";
 import data from "@/data/data.json";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 
 const listOfCategories = [
   {

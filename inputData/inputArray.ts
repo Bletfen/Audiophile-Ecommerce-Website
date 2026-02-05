@@ -1,0 +1,53 @@
+export const inputArray = [
+  {
+    id: 1,
+    title: "Name",
+    placeHolder: "Alexei Ward",
+    type: "text",
+    emptyError: "Can't be empty",
+  },
+  {
+    id: 2,
+    title: "Email Address",
+    placeHolder: "alexei@mail.com",
+    type: "email",
+    emptyError: "Can't be empty",
+    formatError: "Wrong format",
+  },
+  {
+    id: 3,
+    title: "Phone Number",
+    placeHolder: "+1 202-555-0136",
+    type: "tel",
+    emptyError: "Can't be empty",
+    formatError: "Wrong format",
+  },
+  {
+    id: 4,
+    title: "Address",
+    placeHolder: "1137 Williams Avenue",
+    type: "text",
+    emptyError: "Can't be empty",
+  },
+  {
+    id: 5,
+    title: "ZIP Code",
+    placeHolder: "10001",
+    type: "text",
+    emptyError: "Can't be empty",
+  },
+  {
+    id: 6,
+    title: "City",
+    placeHolder: "New York",
+    type: "text",
+    emptyError: "Can't be empty",
+  },
+  {
+    id: 7,
+    title: "Country",
+    placeHolder: "United States",
+    type: "text",
+    emptyError: "Can't be empty",
+  },
+];

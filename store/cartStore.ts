@@ -1,7 +1,7 @@
 import { TProduct } from "@/types/type";
 import { create } from "zustand";
 
-interface IItem {
+export interface IItem {
   product: TProduct;
   quantity: number;
 }
@@ -15,6 +15,7 @@ interface ICartStore {
   decrement: () => void;
   items: IItem[];
   addItem: (item: TProduct, quantity: number) => void;
+  updateItemQuantity: (slug: string, quantity: number) => void;
   clearCart: () => void;
 }
 
@@ -37,10 +38,21 @@ const useCartStore = create<ICartStore>((set) => ({
       items: state.items.some((i) => i.product.slug === item.slug)
         ? state.items.map((i) =>
             i.product.slug === item.slug
-              ? { ...i, quantity: i.quantity + quantity }
+              ? {
+                  ...i,
+                  quantity: Math.min(10, i.quantity + quantity),
+                }
               : i,
           )
-        : [...state.items, { product: item, quantity }],
+        : [...state.items, { product: item, quantity: Math.min(10, quantity) }],
+    })),
+  updateItemQuantity: (slug: string, quantity: number) =>
+    set((state) => ({
+      items: state.items.map((i) =>
+        i.product.slug === slug
+          ? { ...i, quantity: Math.min(10, Math.max(1, quantity)) }
+          : i,
+      ),
     })),
   clearCart: () => set({ items: [] }),
 }));
