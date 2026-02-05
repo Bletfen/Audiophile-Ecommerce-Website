@@ -9,16 +9,206 @@ export default function CheckoutForm() {
   const [paymentMethod, setPaymentMethod] = useState<"eMoney" | "cash" | null>(
     null,
   );
+  const [name, setName] = useState<string>("");
+  const [nameError, setNameError] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [phoneError, setPhoneError] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [addressError, setAddressError] = useState<string>("");
+  const [zipCode, setZipCode] = useState<string>("");
+  const [zipCodeError, setZipCodeError] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [cityError, setCityError] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [countryError, setCountryError] = useState<string>("");
+  const [paymentMethodError, setPaymentMethodError] = useState<string>("");
+  const [eMoneyNumber, setEMoneyNumber] = useState<string>("");
+  const [eMoneyNumberError, setEMoneyNumberError] = useState<string>("");
+  const [eMoneyPin, setEMoneyPin] = useState<string>("");
+  const [eMoneyPinError, setEMoneyPinError] = useState<string>("");
+
+  const getFieldState = (title: string) => {
+    switch (title) {
+      case "Name":
+        return {
+          value: name,
+          setValue: setName,
+          error: nameError,
+          setError: setNameError,
+          emptyError: "Can't be empty",
+        };
+      case "Email Address":
+        return {
+          value: email,
+          setValue: setEmail,
+          error: emailError,
+          setError: setEmailError,
+          emptyError: "Can't be empty",
+          formatError: "Wrong format",
+        };
+      case "Phone Number":
+        return {
+          value: phone,
+          setValue: setPhone,
+          error: phoneError,
+          setError: setPhoneError,
+          emptyError: "Can't be empty",
+          formatError: "Wrong format",
+        };
+      case "Address":
+        return {
+          value: address,
+          setValue: setAddress,
+          error: addressError,
+          setError: setAddressError,
+          emptyError: "Can't be empty",
+        };
+      case "ZIP Code":
+        return {
+          value: zipCode,
+          setValue: setZipCode,
+          error: zipCodeError,
+          setError: setZipCodeError,
+          emptyError: "Can't be empty",
+        };
+      case "City":
+        return {
+          value: city,
+          setValue: setCity,
+          error: cityError,
+          setError: setCityError,
+          emptyError: "Can't be empty",
+        };
+      case "Country":
+        return {
+          value: country,
+          setValue: setCountry,
+          error: countryError,
+          setError: setCountryError,
+          emptyError: "Can't be empty",
+        };
+      default:
+        return null;
+    }
+  };
+
+  const validateRequired = (
+    value: string,
+    setError: (value: string) => void,
+    emptyError: string,
+  ) => {
+    if (!value.trim()) {
+      setError(emptyError);
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const validateEmail = () => {
+    if (!validateRequired(email, setEmailError, "Can't be empty")) return false;
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValid) {
+      setEmailError("Wrong format");
+      return false;
+    }
+    return true;
+  };
+
+  const validatePhone = () => {
+    if (!validateRequired(phone, setPhoneError, "Can't be empty")) return false;
+    const isValid = /^\+?[\d\s()-]{6,}$/.test(phone);
+    if (!isValid) {
+      setPhoneError("Wrong format");
+      return false;
+    }
+    return true;
+  };
+
+  const validateEMoney = () => {
+    if (paymentMethod !== "eMoney") {
+      setEMoneyNumberError("");
+      setEMoneyPinError("");
+      return true;
+    }
+    let isValid = true;
+    if (
+      !validateRequired(eMoneyNumber, setEMoneyNumberError, "Can't be empty")
+    ) {
+      isValid = false;
+    } else if (!/^\d{9}$/.test(eMoneyNumber)) {
+      setEMoneyNumberError("Wrong format");
+      isValid = false;
+    }
+
+    if (!validateRequired(eMoneyPin, setEMoneyPinError, "Can't be empty")) {
+      isValid = false;
+    } else if (!/^\d{4}$/.test(eMoneyPin)) {
+      setEMoneyPinError("Wrong format");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const validatePaymentMethod = () => {
+    if (!paymentMethod) {
+      setPaymentMethodError("Choose payment method");
+      return false;
+    }
+    setPaymentMethodError("");
+    return true;
+  };
+
+  const handleSubmit = () => {
+    const isNameValid = validateRequired(name, setNameError, "Can't be empty");
+    const isEmailValid = validateEmail();
+    const isPhoneValid = validatePhone();
+    const isAddressValid = validateRequired(
+      address,
+      setAddressError,
+      "Can't be empty",
+    );
+    const isZipValid = validateRequired(
+      zipCode,
+      setZipCodeError,
+      "Can't be empty",
+    );
+    const isCityValid = validateRequired(city, setCityError, "Can't be empty");
+    const isCountryValid = validateRequired(
+      country,
+      setCountryError,
+      "Can't be empty",
+    );
+    const isPaymentMethodValid = validatePaymentMethod();
+    const isEMoneyValid = validateEMoney();
+
+    if (
+      !isNameValid ||
+      !isEmailValid ||
+      !isPhoneValid ||
+      !isAddressValid ||
+      !isZipValid ||
+      !isCityValid ||
+      !isCountryValid ||
+      !isPaymentMethodValid ||
+      !isEMoneyValid
+    ) {
+      return;
+    }
+  };
 
   return (
     <div
       className="flex flex-col px-[2.4rem] md:px-[3.9rem] 
         lg:w-[1110px] lg:mx-auto gap-[3.2rem] mt-[3.2rem]
-        md:flex-row md:gap-[3rem]"
+        lg:flex-row md:gap-[3rem]"
     >
       <div
         className="bg-white rounded-[0.8rem] p-[2.4rem]
-        md:w-[73rem]"
+        md:w-[73rem] md:p-[3rem] lg:p-[4.8rem] "
       >
         <h2
           className="text-[3.2rem] font-bold text-[#000]
@@ -34,27 +224,49 @@ export default function CheckoutForm() {
             BILLING DETAILS
           </span>
           <div className="grid gap-[2.4rem] md:grid-cols-2 md:gap-x-[1.6rem]">
-            {billingInputs.map((input) => (
-              <div key={input.id} className="flex flex-col w-[28rem] md:w-full">
-                <label
-                  className="text-[1.2rem] font-bold
-                tracking-[-0.21px] text-[#000]"
-                  htmlFor={input.title}
+            {billingInputs.map((input) => {
+              const field = getFieldState(input.title);
+              const hasError = !!field?.error;
+              return (
+                <div
+                  key={input.id}
+                  className="flex flex-col w-[28rem] md:w-full"
                 >
-                  {input.title}
-                </label>
-                <input
-                  type={input.type}
-                  id={input.title}
-                  placeholder={input.placeHolder}
-                  className="py-[1.8rem] border px-[2.4rem]
-                  rounded-[0.8rem]
-                  border-[#cfcfcf] focus:outline-none
-                  text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000]"
-                />
-              </div>
-            ))}
+                  <div className="flex items-center justify-between">
+                    <label
+                      className="text-[1.2rem] font-bold
+                    tracking-[-0.21px] text-[#000]"
+                      htmlFor={input.title}
+                    >
+                      {input.title}
+                    </label>
+                    {hasError && (
+                      <span className="text-[1.2rem] font-bold text-[#cd2c2c]">
+                        {field?.error}
+                      </span>
+                    )}
+                  </div>
+                  <input
+                    type={input.type}
+                    id={input.title}
+                    placeholder={input.placeHolder}
+                    value={field?.value ?? ""}
+                    onChange={(event) => {
+                      field?.setValue(event.target.value);
+                      if (field?.error) {
+                        field.setError("");
+                      }
+                    }}
+                    className={`py-[1.8rem] border px-[2.4rem]
+                    rounded-[0.8rem]
+                    focus:outline-none
+                    text-[1.4rem] font-bold tracking-[-0.25px]
+                    text-[#000]
+                    ${hasError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
+                  />
+                </div>
+              );
+            })}
           </div>
           <span
             className="text-[1.3rem] font-bold
@@ -63,31 +275,50 @@ export default function CheckoutForm() {
             SHIPPING INFO
           </span>
           <div className="grid gap-[2.4rem] md:grid-cols-2 md:gap-x-[1.6rem]">
-            {shippingInputs.map((input) => (
-              <div
-                key={input.id}
-                className={`flex flex-col w-[28rem] md:w-[30.9rem] ${input.title === "Address" || input.title === "ZIP Code" || input.title === "City" ? "md:w-full" : ""}
+            {shippingInputs.map((input) => {
+              const field = getFieldState(input.title);
+              const hasError = !!field?.error;
+              return (
+                <div
+                  key={input.id}
+                  className={`flex flex-col w-[28rem] md:w-[30.9rem] ${input.title === "Address" || input.title === "ZIP Code" || input.title === "City" ? "md:w-full" : ""}
                 ${input.id === 4 || input.id === 7 ? "md:col-span-2" : "md:col-span-1"}`}
-              >
-                <label
-                  className="text-[1.2rem] font-bold
-                tracking-[-0.21px] text-[#000]"
-                  htmlFor={input.title}
                 >
-                  {input.title}
-                </label>
-                <input
-                  type={input.type}
-                  id={input.title}
-                  placeholder={input.placeHolder}
-                  className="py-[1.8rem] border px-[2.4rem]
-                  rounded-[0.8rem]
-                  border-[#cfcfcf] focus:outline-none
-                  text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000]"
-                />
-              </div>
-            ))}
+                  <div className="flex items-center justify-between">
+                    <label
+                      className="text-[1.2rem] font-bold
+                    tracking-[-0.21px] text-[#000]"
+                      htmlFor={input.title}
+                    >
+                      {input.title}
+                    </label>
+                    {hasError && (
+                      <span className="text-[1.2rem] font-bold text-[#cd2c2c]">
+                        {field?.error}
+                      </span>
+                    )}
+                  </div>
+                  <input
+                    type={input.type}
+                    id={input.title}
+                    placeholder={input.placeHolder}
+                    value={field?.value ?? ""}
+                    onChange={(event) => {
+                      field?.setValue(event.target.value);
+                      if (field?.error) {
+                        field.setError("");
+                      }
+                    }}
+                    className={`py-[1.8rem] border px-[2.4rem]
+                    rounded-[0.8rem]
+                    focus:outline-none
+                    text-[1.4rem] font-bold tracking-[-0.25px]
+                    text-[#000]
+                    ${hasError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="md:flex justify-between">
             <span
@@ -98,6 +329,11 @@ export default function CheckoutForm() {
               PAYMENT DETAILS
             </span>
             <div className="flex flex-col gap-[1.6rem] w-[28rem]">
+              {paymentMethodError && (
+                <span className="text-[1.2rem] font-bold text-[#cd2c2c]">
+                  {paymentMethodError}
+                </span>
+              )}
               <div
                 className={`py-[1.8rem] border px-[2.4rem]
                   rounded-[0.8rem]
@@ -112,7 +348,12 @@ export default function CheckoutForm() {
                   name="payment"
                   value="eMoney"
                   checked={paymentMethod === "eMoney"}
-                  onChange={() => setPaymentMethod("eMoney")}
+                  onChange={() => {
+                    setPaymentMethod("eMoney");
+                    if (paymentMethodError) {
+                      setPaymentMethodError("");
+                    }
+                  }}
                   className="accent-[#d87d4a] cursor-pointer"
                 />
                 <label htmlFor="eMoney">e-Money</label>
@@ -131,7 +372,12 @@ export default function CheckoutForm() {
                   name="payment"
                   value="cash"
                   checked={paymentMethod === "cash"}
-                  onChange={() => setPaymentMethod("cash")}
+                  onChange={() => {
+                    setPaymentMethod("cash");
+                    if (paymentMethodError) {
+                      setPaymentMethodError("");
+                    }
+                  }}
                   className="accent-[#d87d4a] cursor-pointer"
                 />
                 <label htmlFor="cash">Cash on Delivery</label>
@@ -147,43 +393,77 @@ export default function CheckoutForm() {
                 className="flex flex-col gap-[0.9rem]
                 md:w-full"
               >
-                <label
-                  className="text-[1.2rem] font-bold
-                tracking-[-0.21px] text-[#000]"
-                  htmlFor={"eMoneyNumber"}
-                >
-                  e-Money Number
-                </label>
+                <div className="flex items-center justify-between">
+                  <label
+                    className="text-[1.2rem] font-bold
+                  tracking-[-0.21px] text-[#000]"
+                    htmlFor={"eMoneyNumber"}
+                  >
+                    e-Money Number
+                  </label>
+                  {eMoneyNumberError && (
+                    <span className="text-[1.2rem] font-bold text-[#cd2c2c]">
+                      {eMoneyNumberError}
+                    </span>
+                  )}
+                </div>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={9}
+                  pattern="[0-9]*"
                   id={"eMoneyNumber"}
-                  max={9}
                   placeholder="Enter your e-Money number"
-                  className="py-[1.8rem] border px-[2.4rem]
+                  value={eMoneyNumber}
+                  onChange={(event) => {
+                    setEMoneyNumber(event.target.value);
+                    if (eMoneyNumberError) {
+                      setEMoneyNumberError("");
+                    }
+                  }}
+                  className={`py-[1.8rem] border px-[2.4rem]
                   rounded-[0.8rem]
-                  border-[#cfcfcf] focus:outline-none
+                  focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000]"
+                  text-[#000] appearence-none
+                  ${eMoneyNumberError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
                 />
               </div>
               <div className="flex flex-col gap-[0.9rem] md:w-full">
-                <label
-                  className="text-[1.2rem] font-bold
-                tracking-[-0.21px] text-[#000]"
-                  htmlFor={"eMoneyPin"}
-                >
-                  e-Money PIN
-                </label>
+                <div className="flex items-center justify-between">
+                  <label
+                    className="text-[1.2rem] font-bold
+                  tracking-[-0.21px] text-[#000]"
+                    htmlFor={"eMoneyPin"}
+                  >
+                    e-Money PIN
+                  </label>
+                  {eMoneyPinError && (
+                    <span className="text-[1.2rem] font-bold text-[#cd2c2c]">
+                      {eMoneyPinError}
+                    </span>
+                  )}
+                </div>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={4}
+                  pattern="[0-9]*"
                   id={"eMoneyPin"}
-                  max={4}
                   placeholder="Enter your e-Money PIN"
-                  className="py-[1.8rem] border px-[2.4rem]
+                  value={eMoneyPin}
+                  onChange={(event) => {
+                    setEMoneyPin(event.target.value);
+                    if (eMoneyPinError) {
+                      setEMoneyPinError("");
+                    }
+                  }}
+                  className={`py-[1.8rem] border px-[2.4rem]
                   rounded-[0.8rem]
-                  border-[#cfcfcf] focus:outline-none
+                  focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000]"
+                  text-[#000] appearence-none
+                  ${eMoneyPinError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
                 />
               </div>
             </div>
@@ -221,7 +501,7 @@ export default function CheckoutForm() {
         </form>
       </div>
       <div>
-        <Summary />
+        <Summary onSubmit={handleSubmit} />
       </div>
     </div>
   );

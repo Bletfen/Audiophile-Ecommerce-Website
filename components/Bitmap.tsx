@@ -51,7 +51,7 @@ export default function Bitmap() {
           for the passionate music enthusiast.
         </p>
         <Link
-          href="#"
+          href="/headphones/xx99-mark-two-headphones"
           className="px-[3rem] py-[1.5rem] bg-[#d87d4a]
           text-white text-[1.3rem] font-bold
           mt-[3.2rem] inline-block

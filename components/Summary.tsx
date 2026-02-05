@@ -2,7 +2,7 @@ import useCartStore from "@/store/cartStore";
 import Image from "next/image";
 import { getDisplayName } from "@/namemodifier/nameModifier";
 
-export default function Summary() {
+export default function Summary({ onSubmit }: { onSubmit: () => void }) {
   const { items } = useCartStore();
   const total = items
     .map(({ product, quantity }) => product.price * quantity)
@@ -22,7 +22,7 @@ export default function Summary() {
   return (
     <div
       className="bg-white p-[2.4rem] rounded-[0.8rem]
-        mb-[9.7rem] md:w-[35rem]"
+        mb-[9.7rem] lg:w-[35rem] md:p-[3.2rem]"
     >
       <h2
         className="text-[1.8rem] font-bold text-[#000]
@@ -94,6 +94,7 @@ export default function Summary() {
         className="py-[1.5rem] text-center w-full
         bg-[#d87d4a] text-white font-bold text-[1.3rem]
         tracking-[0.1rem]"
+        onClick={onSubmit}
       >
         CONTINUE & PAY
       </button>
