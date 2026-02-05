@@ -9,7 +9,7 @@ export const inputArray = [
   {
     id: 2,
     title: "Email Address",
-    placeHolder: "alexei@mail.com",
+    placeHolder: "alexei@gmail.com",
     type: "email",
     emptyError: "Can't be empty",
     formatError: "Wrong format",

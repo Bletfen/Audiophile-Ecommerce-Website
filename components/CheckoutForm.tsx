@@ -1,7 +1,6 @@
 "use client";
 import { inputArray } from "@/inputData/inputArray";
 import { useState } from "react";
-import Cart from "./Cart";
 import Summary from "./Summary";
 
 export default function CheckoutForm() {
@@ -14,9 +13,13 @@ export default function CheckoutForm() {
   return (
     <div
       className="flex flex-col px-[2.4rem] md:px-[3.9rem] 
-        lg:w-[1110px] lg:mx-auto gap-[3.2rem] mt-[3.2rem]"
+        lg:w-[1110px] lg:mx-auto gap-[3.2rem] mt-[3.2rem]
+        md:flex-row md:gap-[3rem]"
     >
-      <div className="bg-white rounded-[0.8rem] p-[2.4rem]">
+      <div
+        className="bg-white rounded-[0.8rem] p-[2.4rem]
+        md:w-[73rem]"
+      >
         <h2
           className="text-[3.2rem] font-bold text-[#000]
         tracking-[1.14px] leading-[1.13] self-start mb-[3.2rem]"
@@ -138,7 +141,7 @@ export default function CheckoutForm() {
           {paymentMethod === "eMoney" && (
             <div
               className="flex flex-col gap-[2.4rem] mb-[9.5rem]
-            w-[28rem] md:flex-row md:w-full"
+            w-[28rem] md:flex-row md:w-full md:mb-[0]"
             >
               <div
                 className="flex flex-col gap-[0.9rem]
