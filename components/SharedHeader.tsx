@@ -55,7 +55,7 @@ export default function SharedHeader() {
             lg:gap-[19.7rem]"
           >
             <svg
-              className="lg:hidden"
+              className="lg:hidden cursor-pointer"
               width="16"
               height="15"
               xmlns="http://www.w3.org/2000/svg"
@@ -147,9 +147,13 @@ export default function SharedHeader() {
           <div
             onClick={() => setIsOpen(false)}
             className="fixed inset-x-0 bottom-0 lg:hidden
-              top-[10.8rem] md:top-[9rem] z-50 bg-black/50 min-h-screen"
+              top-[10.8rem] md:top-[9rem] z-50 bg-black/50
+              min-h-screen"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <Category type="menu" />
+            <div onClick={(event) => event.stopPropagation()}>
+              <Category type="menu" />
+            </div>
           </div>
         )}
         {isCartOpen && (

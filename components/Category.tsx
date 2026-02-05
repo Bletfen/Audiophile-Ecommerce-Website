@@ -31,7 +31,7 @@ export default function Category({ type }: { type?: string }) {
       transition-all duration-300
       md:gap-[1rem] md:justify-center
       lg:gap-[3rem]
-      ${type === "menu" ? "w-full absolute left-1/2 -translate-x-1/2 w-[calc(100%-4.8rem)] max-w-[1110px] bg-white z-50 pb-[3.5rem] md:pb-[6.5rem] rounded-b-[0.8rem] justify-between" : ""}`}
+      ${type === "menu" ? "w-full absolute left-1/2 -translate-x-1/2 w-[calc(100%-4.8rem)] max-w-[1110px] bg-white z-50 pb-[3.5rem] md:pb-[6.5rem] rounded-b-[0.8rem] justify-between max-h-[70vh] lg:max-h-[80vh] overflow-y-auto overscroll-contain" : ""}`}
     >
       {listOfCategories.map((item, i) => (
         <div key={i}>
