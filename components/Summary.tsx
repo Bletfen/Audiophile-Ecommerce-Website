@@ -107,7 +107,8 @@ export default function Summary({
       <button
         className="py-[1.5rem] text-center w-full
         bg-[#d87d4a] text-white font-bold text-[1.3rem]
-        tracking-[0.1rem] cursor-pointer"
+        tracking-[0.1rem] cursor-pointer hover:bg-[#fbaf85]
+        transition-all duration-300"
         onClick={onSubmit}
       >
         CONTINUE & PAY

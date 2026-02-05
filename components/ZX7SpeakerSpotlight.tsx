@@ -27,7 +27,9 @@ export default function ZX7SpeakerSpotlight() {
         px-[2.9rem] py-[1.5rem]
         text-[1.3rem] font-bold
         tracking-[0.1rem]
-        mt-[3.2rem]"
+        mt-[3.2rem] cursor-pointer
+        hover:bg-[#000] hover:text-white
+        transition-all duration-300"
       >
         SEE PRODUCT
       </Link>

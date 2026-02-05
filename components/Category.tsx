@@ -60,10 +60,12 @@ export default function Category({ type }: { type?: string }) {
               }}
             />
             <div></div>
-            <div
+            <Link
+              href={"/" + item.category}
               className="bg-[#f1f1f1] rounded-[0.8rem]
                 w-full pt-[8.8rem] pb-[2.2rem]
-                flex flex-col items-center"
+                flex flex-col items-center
+                group"
             >
               <h2
                 className="text-[1.5rem] font-bold
@@ -73,33 +75,36 @@ export default function Category({ type }: { type?: string }) {
               >
                 {item.category.toUpperCase()}
               </h2>
-              <div className="cursor-pointer">
-                <Link
-                  href={"/" + item.category}
+              <div
+                className="cursor-pointer 
+                  flex items-center
+                    gap-[1.3rem] justify-center"
+              >
+                <p
                   className="text-[1.3rem] font-bold
                     tracking-[0.1rem] text-[#000] opacity-50
-                    flex items-center
-                    gap-[1.3rem] justify-center
+                    group-hover:text-[#d87d4a] group-hover:opacity-100
+                    transition-all duration-300
                     "
                 >
                   SHOP
-                  <svg
-                    width="8"
-                    height="12"
-                    viewBox="0 0 8 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      id="Path 2"
-                      d="M0.707031 0.707031L5.70703 5.70703L0.707031 10.707"
-                      stroke="#D87D4A"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </Link>
+                </p>
+                <svg
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="Path 2"
+                    d="M0.707031 0.707031L5.70703 5.70703L0.707031 10.707"
+                    stroke="#D87D4A"
+                    strokeWidth="2"
+                  />
+                </svg>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       ))}

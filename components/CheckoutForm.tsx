@@ -237,7 +237,7 @@ export default function CheckoutForm() {
                   <div className="flex items-center justify-between">
                     <label
                       className="text-[1.2rem] font-bold
-                    tracking-[-0.21px] text-[#000]"
+                    tracking-[-0.21px] text-[#000] mb-[0.9rem]"
                       htmlFor={input.title}
                     >
                       {input.title}
@@ -263,7 +263,7 @@ export default function CheckoutForm() {
                     rounded-[0.8rem]
                     focus:outline-none
                     text-[1.4rem] font-bold tracking-[-0.25px]
-                    text-[#000]
+                    text-[#000] focus-within:border-[#d87d4a]
                     ${hasError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
                   />
                 </div>
@@ -289,7 +289,7 @@ export default function CheckoutForm() {
                   <div className="flex items-center justify-between">
                     <label
                       className="text-[1.2rem] font-bold
-                    tracking-[-0.21px] text-[#000]"
+                    tracking-[-0.21px] text-[#000] mb-[0.9rem]"
                       htmlFor={input.title}
                     >
                       {input.title}
@@ -337,11 +337,18 @@ export default function CheckoutForm() {
                 </span>
               )}
               <div
+                onClick={() => {
+                  setPaymentMethod("eMoney");
+                  if (paymentMethodError) {
+                    setPaymentMethodError("");
+                  }
+                }}
                 className={`py-[1.8rem] border px-[2.4rem]
                   rounded-[0.8rem]
-                focus:outline-none
+                    focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000] flex items-center gap-[1.6rem]
+                  text-[#000] flex items-center gap-[1.6rem] cursor-pointer
+                  hover:border-[#d87d4a] transition-all duration-300
                   ${paymentMethod === "eMoney" ? "border-[#d87d4a]" : "border-[#cfcfcf]"}`}
               >
                 <input
@@ -358,14 +365,23 @@ export default function CheckoutForm() {
                   }}
                   className="accent-[#d87d4a] cursor-pointer"
                 />
-                <label htmlFor="eMoney">e-Money</label>
+                <label htmlFor="eMoney" className="cursor-pointer">
+                  e-Money
+                </label>
               </div>
               <div
+                onClick={() => {
+                  setPaymentMethod("cash");
+                  if (paymentMethodError) {
+                    setPaymentMethodError("");
+                  }
+                }}
                 className={`py-[1.8rem] border px-[2.4rem]
                   rounded-[0.8rem] 
                   focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000] flex items-center gap-[1.6rem]
+                  hover:border-[#d87d4a] transition-all duration-300
+                  text-[#000] flex items-center gap-[1.6rem] cursor-pointer
                     ${paymentMethod === "cash" ? "border-[#d87d4a]" : "border-[#cfcfcf]"}`}
               >
                 <input
@@ -382,7 +398,9 @@ export default function CheckoutForm() {
                   }}
                   className="accent-[#d87d4a] cursor-pointer"
                 />
-                <label htmlFor="cash">Cash on Delivery</label>
+                <label htmlFor="cash" className="cursor-pointer">
+                  Cash on Delivery
+                </label>
               </div>
             </div>
           </div>
@@ -427,7 +445,8 @@ export default function CheckoutForm() {
                   rounded-[0.8rem]
                   focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000] appearence-none
+                  text-[#000] appearance-none
+                  focus-within:border-[#d87d4a]
                   ${eMoneyNumberError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
                 />
               </div>
@@ -464,7 +483,8 @@ export default function CheckoutForm() {
                   rounded-[0.8rem]
                   focus:outline-none
                   text-[1.4rem] font-bold tracking-[-0.25px]
-                  text-[#000] appearence-none
+                  text-[#000] appearance-none
+                  focus-within:border-[#d87d4a]
                   ${eMoneyPinError ? "border-[#cd2c2c]" : "border-[#cfcfcf]"}`}
                 />
               </div>

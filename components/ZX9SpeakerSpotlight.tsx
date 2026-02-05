@@ -58,7 +58,9 @@ export default function ZX9SpeakerSpotlight() {
           className="bg-[#000]
             px-[3.1rem] py-[1.5rem]
             text-[1.3rem] font-bold
-            tracking-[0.1rem]"
+            tracking-[0.1rem]
+            hover:bg-[#4c4c4c]
+            transition-colors duration-300"
         >
           SEE PRODUCT
         </Link>

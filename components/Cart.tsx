@@ -25,7 +25,9 @@ export default function Cart() {
           {items.length > 0 && (
             <button
               className="text-[1.5rem] font-[500] text-[#000]
-                opacity-50 underline"
+                opacity-50 underline cursor-pointer text-underline
+                transition-all duration-300
+                hover:text-[#d87d4a] hover:opacity-100"
               onClick={clearCart}
             >
               Remove all

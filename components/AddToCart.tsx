@@ -51,12 +51,14 @@ export default function AddToCart({ item }: { item: TProduct }) {
       <AddedToCartToast show={showToast} message={toastMessage} />
       <QuantityManager />
       <div
-        className="py-[1.5rem] px-[3.4rem] bg-[#d87d4a] cursor-pointer"
+        className="py-[1.5rem] px-[3.4rem] bg-[#d87d4a] cursor-pointer
+        hover:bg-[#fbaf85] transition-all duration-300"
         onClick={handleAddToCart}
       >
         <button
           className="text-white font-bold text-[1.3rem]
-          tracking-[0.1rem] cursor-pointer"
+          tracking-[0.1rem] cursor-pointer 
+          "
         >
           ADD TO CART
         </button>

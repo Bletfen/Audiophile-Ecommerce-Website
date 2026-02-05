@@ -69,7 +69,8 @@ export default function OtherOffers({
               href={`/${categoryBySlug.get(item.slug)}/${item.slug}`}
               className="px-[3rem] py-[1.5rem] bg-[#d87d4a]
                 text-white text-[1.3rem] font-bold
-                inline-block
+                inline-block cursor-pointer
+                hover:bg-[#fbaf85] transition-all duration-300
                 "
             >
               SEE PRODUCT

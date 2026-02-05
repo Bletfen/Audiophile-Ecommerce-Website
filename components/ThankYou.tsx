@@ -3,9 +3,11 @@ import useCartStore from "@/store/cartStore";
 import Image from "next/image";
 import { getDisplayName } from "@/namemodifier/nameModifier";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ThankYou() {
   const { items, clearCart } = useCartStore();
+  const [showAll, setShowAll] = useState(false);
   const firstItem = items[0];
   const totalItems = items.length - 1;
   const total = items
@@ -54,10 +56,18 @@ export default function ThankYou() {
         >
           You will receive an email confirmation shortly.
         </p>
-        <div>
-          <div className="p-[2.4rem] bg-[#F1F1F1] rounded-t-[0.8rem]">
+        <div className="lg:flex">
+          <div
+            className="p-[2.4rem] bg-[#F1F1F1] rounded-t-[0.8rem]
+            lg:rounded-l-[0.8rem] lg:rounded-tr-[0rem]
+            lg:p-[3.2rem]
+            "
+          >
             <div className="flex items-center justify-between mb-[1.6rem]">
-              <div className="flex items-center gap-[1.6rem]">
+              <div
+                className="flex items-center gap-[1.6rem]
+                "
+              >
                 <Image
                   src={firstItem.product.image.mobile}
                   alt={firstItem.product.name}
@@ -65,7 +75,7 @@ export default function ThankYou() {
                   height={64}
                   className="rounded-[0.8rem]"
                 />
-                <div>
+                <div className="lg:mr-[4.3rem]">
                   <h3
                     className="text-[1.5rem] font-bold leading-[1.67]
                             text-[#000]"
@@ -89,14 +99,60 @@ export default function ThankYou() {
                 <span>x{firstItem.quantity}</span>
               </div>
             </div>
+            {showAll && totalItems > 0 && (
+              <div className="mt-[1.6rem] flex flex-col gap-[1.6rem]">
+                {items.slice(1).map(({ product, quantity }) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-[1.6rem]">
+                      <Image
+                        src={product.image.mobile}
+                        alt={product.name}
+                        width={64}
+                        height={64}
+                        className="rounded-[0.8rem]"
+                      />
+                      <div>
+                        <h3
+                          className="text-[1.5rem] font-bold leading-[1.67]
+                            text-[#000]"
+                        >
+                          {getDisplayName(
+                            product.name.replace("Headphones", ""),
+                          )}
+                        </h3>
+                        <span
+                          className="text-[1.4rem] font-bold
+                            leading-[1.79] text-[#000] opacity-50"
+                        >
+                          $ {product.price.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className="text-[1.5rem] font-bold
+                        leading-[1.67] text-[#000] opacity-50"
+                    >
+                      <span>x{quantity}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
             {totalItems > 0 && (
               <>
                 <div className="h-px w-full opacity-8 bg-[#000]"></div>
-                <div className="flex items-center justify-center mt-[1.2rem]">
+                <button
+                  type="button"
+                  onClick={() => setShowAll((prev) => !prev)}
+                  className="flex items-center justify-center mt-[1.2rem] w-full"
+                >
                   <span className="text-[1.2rem] font-bold tracking-[-0.21px] opacity-50 text-[#000]">
-                    and {totalItems} other item(s)
+                    {showAll ? "View less" : `and ${totalItems} other item(s)`}
                   </span>
-                </div>
+                </button>
               </>
             )}
           </div>
@@ -104,7 +160,10 @@ export default function ThankYou() {
             <div
               className="flex flex-col gap-[0.8rem]
                 bg-[#000] py-[1.5rem] px-[2.4rem] text-white
-                rounded-b-[0.8rem]"
+                rounded-b-[0.8rem] 
+                lg:rounded-r-[0.8rem] lg:rounded-bl-[0rem]
+                h-full justify-end lg:p-[3.2rem]
+                "
             >
               <span
                 className="text-[1.5rem] font-[500] leading-[1.67]
@@ -123,7 +182,8 @@ export default function ThankYou() {
           <button
             className="py-[1.5rem] text-center
             bg-[#D87D4A] text-white font-bold w-full mt-[2.3rem]
-            text-[1.3rem] tracking-[0.1rem] cursor-pointer"
+            text-[1.3rem] tracking-[0.1rem] cursor-pointer
+            hover:bg-[#fbaf85] transition-all duration-300"
           >
             BACK TO HOME
           </button>

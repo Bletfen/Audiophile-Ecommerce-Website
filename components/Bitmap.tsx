@@ -55,7 +55,10 @@ export default function Bitmap() {
           className="px-[3rem] py-[1.5rem] bg-[#d87d4a]
           text-white text-[1.3rem] font-bold
           mt-[3.2rem] inline-block
-          lg:mt-[4rem]"
+          lg:mt-[4rem] cursor-pointer
+          hover:bg-[#fbaf85]
+          transition-colors duration-300
+        "
         >
           SEE PRODUCT
         </Link>

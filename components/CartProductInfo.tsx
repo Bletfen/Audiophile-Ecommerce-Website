@@ -84,7 +84,8 @@ export default function CartProductInfo({
         href={"/checkout"}
         className="block text-[1.3rem] font-bold tracking-[0.1rem]
         text-[#fff] py-[1.5rem] w-full mt-[2.4rem]
-        text-center bg-[#d87d4a] cursor-pointer"
+        text-center bg-[#d87d4a] cursor-pointer
+        hover:bg-[#fbaf85] transition-all duration-300"
         onClick={() => setIsCartOpen(false)}
       >
         CHECKOUT

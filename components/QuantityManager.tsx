@@ -57,7 +57,7 @@ export default function QuantityMangaer({
           type="button"
           onClick={handleDecrement}
           aria-label="Decrease quantity"
-          className="p-1 cursor-pointer"
+          className="p-1 cursor-pointer group"
         >
           <svg
             width="4"
@@ -65,6 +65,8 @@ export default function QuantityMangaer({
             viewBox="0 0 4 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="text-[#000] group-hover:text-[#d87d4a]
+            transition-colors duration-300"
           >
             <path
               opacity="0.25"
@@ -77,16 +79,17 @@ export default function QuantityMangaer({
           type="number"
           min="1"
           max="10"
+          readOnly
           value={displayQuantity}
           onChange={handleChange}
           className="text-[1.3rem] font-bold
-          tracking-[0.1rem] text-center"
+          tracking-[0.1rem] text-center outline-none"
         />
         <button
           type="button"
           onClick={handleIncrement}
           aria-label="Increase quantity"
-          className="p-1 cursor-pointer"
+          className="p-1 cursor-pointer group"
         >
           <svg
             width="6"
@@ -94,6 +97,8 @@ export default function QuantityMangaer({
             viewBox="0 0 6 6"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="text-[#000] group-hover:text-[#d87d4a]
+            transition-colors duration-300"
           >
             <path
               opacity="0.25"
